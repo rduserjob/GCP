@@ -9,7 +9,7 @@ provider "google" {
 
 # Creating vm
 resource "google_compute_instance" "mi_vm" {
-  name         = "Terraform-Vm"
+  name         = "terraform-Vm"
   machine_type = "e2-micro"  
   zone         = "us-central1-a"
 
