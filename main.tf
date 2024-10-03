@@ -42,7 +42,7 @@ resource "google_compute_instance" "mi_vm" {
 
 # firewall tools
 resource "google_compute_firewall" "allow-http-ssh" {
-  name    = "allow-http-ssh-2"
+  name    = "allow-http-ssh-3"
   network = "default"
 
   allow {
