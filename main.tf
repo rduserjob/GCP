@@ -2,7 +2,7 @@
 
 # Configuring GCP Provider
 provider "google" {
-  project = "my-pagerduty-demo-project-v01"  
+  project = "coe-project-team"  
   region  = "us-central1"    
   zone    = "us-central1-a"   #
 }
