@@ -6,7 +6,7 @@ provider "google" {
 }
 
 # Creating the first VM
-resource "google_compute_instance" "mi_vm" {
+resource "google_compute_instance" "my_vm" {
   name         = "terraform-vm"
   machine_type = "e2-micro"  
   zone         = "us-central1-a"
