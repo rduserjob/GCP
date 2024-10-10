@@ -1,13 +1,11 @@
-# main.tf
-
 # Configuring GCP Provider
 provider "google" {
   project = "coe-project-team"  
   region  = "us-central1"    
-  zone    = "us-central1-a"   #
+  zone    = "us-central1-a"
 }
 
-# Creating vm
+# Creating the first VM
 resource "google_compute_instance" "mi_vm" {
   name         = "terraform-vm"
   machine_type = "e2-micro"  
@@ -23,7 +21,7 @@ resource "google_compute_instance" "mi_vm" {
     }
   }
 
-  # Disk and SO
+  # Disk and OS
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-11"  
@@ -33,16 +31,49 @@ resource "google_compute_instance" "mi_vm" {
   # Metadata startup scripts
   metadata_startup_script = <<-EOT
     #!/bin/bash
-    echo "Hello,world since my VM!" > /var/tmp/hello_world.txt
+    echo "Hello, world from my VM!" > /var/tmp/hello_world.txt
   EOT
 
   # tags
   tags = ["terraform-http-server"]
 }
 
-# firewall tools
+# Creating the second VM (newvm)
+resource "google_compute_instance" "new_vm" {
+  name         = "newvm"
+  machine_type = "e2-medium"  
+  zone         = "us-central1-a"
+
+  # network and sub-network
+  network_interface {
+    network    = "default"
+    subnetwork = "default"
+
+    access_config {
+      # Public IP
+    }
+  }
+
+  # Disk and OS
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"  
+    }
+  }
+
+  # Metadata startup scripts
+  metadata_startup_script = <<-EOT
+    #!/bin/bash
+    echo "Hello, world from VM 2 !" > /var/tmp/hello_newvm.txt
+  EOT
+
+  # tags
+  tags = ["terraform-http-server"]
+}
+
+# Firewall rules
 resource "google_compute_firewall" "allow-http-ssh" {
-  name    = "allow-http-ssh-4"
+  name    = "allow-http-ssh-1"
   network = "default"
 
   allow {
