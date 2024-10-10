@@ -40,7 +40,7 @@ resource "google_compute_instance" "mi_vm" {
 
 # Creating the second VM (newvm)
 resource "google_compute_instance" "new_vm" {
-  name         = "newvm"
+  name         = "newvmtf"
   machine_type = "e2-medium"  
   zone         = "us-central1-a"
 
